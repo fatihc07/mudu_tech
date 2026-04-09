@@ -134,6 +134,19 @@ body {
   border-bottom: 2px solid var(--text-title);
 }
 
+.nav-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.admin-nav-btn {
+  opacity: 0.7;
+  border-style: dashed; /* Different border style for admin */
+}
+.admin-nav-btn:hover {
+  opacity: 1;
+}
+
 .nav-btn {
   padding: 0.6rem 1.5rem;
   font-size: 0.9rem;
