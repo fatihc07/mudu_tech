@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MUDU TECH '26 | 14-15 Mayıs Teknoloji Zirvesi</title>
+  <meta name="description"
+    content="Üniversitemizin en büyük teknoloji etkinliği: MUDU TECH '26. 14-15 Mayıs tarihlerinde bizimle teknolojiye doyacaksınız!" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+
+<body>
+  <!-- Main Framed Container Like the Reference Design -->
+  <div class="page-frame">
+    <div class="hero-card">
+
+      <!-- Navbar -->
+      <header class="navbar">
+        <div class="logo">
+          <img src="/logo.png" alt="MUDU TECH Logo" class="logo-img">
+          <span>MUDU TECH</span>
+        </div>
+        <nav class="nav-links">
+          <a href="#home" class="active">Ana Sayfa</a>
+          <a href="#about">Hakkında</a>
+          <a href="#sponsors">Sponsorlar</a>
+          <a href="#register">Kayıt</a>
+        </nav>
+        <a href="#register" class="btn-outline nav-btn">Hemen Kaydol</a>
+      </header>
+
+      <!-- Hero Content -->
+      <div class="hero-content" id="home">
+        <h1>TEKNOLOJİYLE <span>GELECEK</span></h1>
+        <p class="subtitle">Yılın en büyük 2 günlük teknoloji ve yazılım etkinliğine hazır ol. Kodlamanın, inovasyonun
+          ve sınırları aşmanın tam zamanı!</p>
+
+        <div class="hero-buttons">
+          <a href="#register" class="btn-filled">Şimdi Kayıt Ol</a>
+          <a href="#sponsors" class="btn-outline">Sponsorlar</a>
+        </div>
+
+        <!-- Countdown -->
+        <div class="countdown fade-in">
+          <div class="time-box"><span id="days">00</span>
+            <p>Gün</p>
+          </div>
+          <div class="time-box"><span id="hours">00</span>
+            <p>Saat</p>
+          </div>
+          <div class="time-box"><span id="minutes">00</span>
+            <p>Dakika</p>
+          </div>
+          <div class="time-box"><span id="seconds">00</span>
+            <p>Saniye</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fade Overlay for the background image -->
+      <div class="hero-bg-overlay"></div>
+    </div>
+  </div>
+
+  <!-- Rest of the Website Sections (Sponsors & Register) -->
+  <main>
+    <!-- Sponsors Section -->
+    <section id="sponsors" class="sponsors">
+      <div class="sponsors-container slide-up">
+        <h2>Sponsorlarımız ve Katılımcı Firmalar</h2>
+        <p>Bu büyük teknoloji şöleni, değerli partnerlerimizin ve katılımcı firmaların katkılarıyla gerçekleşiyor.</p>
+        
+        <h3 class="section-subheading">Sponsorlarımız</h3>
+        <div class="sponsor-grid">
+          <div class="sponsor-item">Platin Sponsor</div>
+          <div class="sponsor-item">Altın Sponsor</div>
+          <div class="sponsor-item">Gümüş Sponsor</div>
+        </div>
+
+        <h3 class="section-subheading">Katılımcı Firmalar</h3>
+        <div class="sponsor-grid">
+          <div class="sponsor-item">Firma 1</div>
+          <div class="sponsor-item">Firma 2</div>
+          <div class="sponsor-item">Firma 3</div>
+          <div class="sponsor-item">Firma 4</div>
+          <div class="sponsor-item">Firma 5</div>
+          <div class="sponsor-item">Firma 6</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="register" class="registration">
+      <div class="form-container slide-up">
+        <h2>Etkinliğe Kayıt Ol</h2>
+        <p>Kontenjanlar dolmadan yerini ayırt.</p>
+
+        <form id="register-form">
+          <div class="input-group">
+            <label for="name">Ad Soyad</label>
+            <input type="text" id="name" required placeholder="Örn: Ali Yılmaz">
+          </div>
+
+          <div class="input-group">
+            <label for="email">E-posta Adresi</label>
+            <input type="email" id="email" required placeholder="ogrenci@universite.edu.tr">
+          </div>
+
+          <div class="input-group">
+            <label for="department">Bölüm / Sınıf</label>
+            <input type="text" id="department" required placeholder="Bilgisayar Müh. / 2. Sınıf">
+          </div>
+
+          <div class="input-group">
+            <label for="survey">Seni en çok hangi konu heyecanlandırıyor?</label>
+            <select id="survey" required>
+              <option value="" disabled selected>Bir seçim yap...</option>
+              <option value="Yapay Zeka">Yapay Zeka (AI)</option>
+              <option value="Siber Güvenlik">Siber Güvenlik</option>
+              <option value="Web/Mobil Geliştirme">Web / Mobil Geliştirme</option>
+              <option value="Oyun Geliştirme">Oyun Geliştirme</option>
+              <option value="Diğer">Diğer</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-filled btn-submit" id="submit-btn">
+            <span>Gönder</span>
+            <div class="loader" id="loader" style="display:none;"></div>
+          </button>
+
+          <div id="form-message" class="message"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 MUDU TECH Ekibi. Tüm hakları saklıdır.</p>
+  </footer>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+
+</html>
