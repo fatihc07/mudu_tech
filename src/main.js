@@ -180,3 +180,29 @@ if (eduForm) {
     }
   });
 }
+
+// Educator Modal Logic
+const modal = document.getElementById("educator-modal");
+const openBtn = document.getElementById("open-educator-btn");
+const closeSpan = document.querySelector(".close-modal");
+
+if (openBtn) {
+  openBtn.onclick = function() {
+    modal.style.display = "block";
+    document.body.style.overflow = "hidden";
+  }
+}
+
+if (closeSpan) {
+  closeSpan.onclick = function() {
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
+}

@@ -33,7 +33,7 @@
           <a href="#home" class="active">Ana Sayfa</a>
           <a href="#about">Hakkında</a>
           <a href="#sponsors">Sponsorlar</a>
-          <a href="#educator">Eğitimci Ol</a>
+          <a href="javascript:void(0)" id="open-educator-btn">Eğitimci Ol</a>
           <a href="#register">Kayıt</a>
         </nav>
         <div class="nav-buttons">
@@ -102,89 +102,94 @@
       </div>
     </section>
 
-    <!-- Educator Section -->
-    <section id="educator" class="educator">
-      <div class="form-container educator-form slide-up">
-        <h2>Eğitimci Başvurusu</h2>
-        <p>Bilgini paylaş, geleceğin teknoloji liderlerini yetiştirmemize yardımcı ol.</p>
+    <!-- Educator Modal -->
+    <div id="educator-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <section id="educator" class="educator-modal-section">
+          <div class="form-container educator-form">
+            <h2>Eğitimci Başvurusu</h2>
+            <p>Bilgini paylaş, geleceğin teknoloji liderlerini yetiştirmemize yardımcı ol.</p>
 
-        <form id="educator-form">
-          <div class="input-group">
-            <label for="edu-name">Adınız Soyadınız *</label>
-            <input type="text" id="edu-name" required placeholder="Cevabınız">
+            <form id="educator-form">
+              <div class="input-group">
+                <label for="edu-name">Adınız Soyadınız *</label>
+                <input type="text" id="edu-name" required placeholder="Cevabınız">
+              </div>
+
+              <div class="input-group">
+                <label for="edu-email">E-posta Adresiniz *</label>
+                <input type="email" id="edu-email" required placeholder="Cevabınız">
+              </div>
+
+              <div class="input-group">
+                <label for="edu-phone">Telefon Numaranız *</label>
+                <input type="tel" id="edu-phone" required placeholder="Cevabınız">
+              </div>
+
+              <div class="input-group">
+                <label for="edu-title">Önerdiğiniz Atölye Konusu/Başlığı *</label>
+                <input type="text" id="edu-title" required placeholder="Cevabınız">
+              </div>
+
+              <div class="input-group">
+                <label for="edu-desc">Atölye Konusunun Kısa Açıklaması (Hedef kitle, amaç ve içerik özeti) *</label>
+                <textarea id="edu-desc" required placeholder="Cevabınız" rows="4"></textarea>
+              </div>
+
+              <div class="input-group radio-group">
+                <label>Öngördüğünüz Eğitim Süresi Ne Kadar Olmalıdır? *</label>
+                <div class="options">
+                  <label class="option-item">
+                    <input type="radio" name="edu-duration" value="Yarım Gün" required>
+                    <span>Yarım Gün (Örn: 3-4 saat)</span>
+                  </label>
+                  <label class="option-item">
+                    <input type="radio" name="edu-duration" value="Tam Gün">
+                    <span>Tam Gün (Örn: 6-8 saat)</span>
+                  </label>
+                  <label class="option-item">
+                    <input type="radio" name="edu-duration" value="2 Gün">
+                    <span>2 Gün (Toplam 12-16 saat)</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="input-group checkbox-group">
+                <label>Atölyeyi Hangi Formatlarda Gerçekleştirmeyi Tercih Edersiniz? *</label>
+                <div class="options">
+                  <label class="option-item">
+                    <input type="checkbox" name="edu-format" value="Yüz Yüze Etkinlik">
+                    <span>Yüz Yüze Etkinlik</span>
+                  </label>
+                  <label class="option-item">
+                    <input type="checkbox" name="edu-format" value="Çevrimiçi (Online) Webinar/Eğitim">
+                    <span>Çevrimiçi (Online) Webinar/Eğitim</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label for="edu-notes">Eklemek istediğiniz notlar veya atölye materyali/özgeçmişiniz varsa ekleyiniz. (İsteğe Bağlı)</label>
+                <textarea id="edu-notes" placeholder="Cevabınız" rows="3"></textarea>
+              </div>
+
+              <div class="input-group">
+                <label for="edu-location">Bulunduğunuz İl *</label>
+                <input type="text" id="edu-location" required placeholder="Cevabınız">
+              </div>
+
+              <button type="submit" class="btn-filled btn-submit" id="edu-submit-btn">
+                <span>Gönder</span>
+                <div class="loader" id="edu-loader" style="display:none;"></div>
+              </button>
+
+              <div id="edu-form-message" class="message"></div>
+            </form>
           </div>
-
-          <div class="input-group">
-            <label for="edu-email">E-posta Adresiniz *</label>
-            <input type="email" id="edu-email" required placeholder="Cevabınız">
-          </div>
-
-          <div class="input-group">
-            <label for="edu-phone">Telefon Numaranız *</label>
-            <input type="tel" id="edu-phone" required placeholder="Cevabınız">
-          </div>
-
-          <div class="input-group">
-            <label for="edu-title">Önerdiğiniz Atölye Konusu/Başlığı *</label>
-            <input type="text" id="edu-title" required placeholder="Cevabınız">
-          </div>
-
-          <div class="input-group">
-            <label for="edu-desc">Atölye Konusunun Kısa Açıklaması (Hedef kitle, amaç ve içerik özeti) *</label>
-            <textarea id="edu-desc" required placeholder="Cevabınız" rows="4"></textarea>
-          </div>
-
-          <div class="input-group radio-group">
-            <label>Öngördüğünüz Eğitim Süresi Ne Kadar Olmalıdır? *</label>
-            <div class="options">
-              <label class="option-item">
-                <input type="radio" name="edu-duration" value="Yarım Gün" required>
-                <span>Yarım Gün (Örn: 3-4 saat)</span>
-              </label>
-              <label class="option-item">
-                <input type="radio" name="edu-duration" value="Tam Gün">
-                <span>Tam Gün (Örn: 6-8 saat)</span>
-              </label>
-              <label class="option-item">
-                <input type="radio" name="edu-duration" value="2 Gün">
-                <span>2 Gün (Toplam 12-16 saat)</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="input-group checkbox-group">
-            <label>Atölyeyi Hangi Formatlarda Gerçekleştirmeyi Tercih Edersiniz? *</label>
-            <div class="options">
-              <label class="option-item">
-                <input type="checkbox" name="edu-format" value="Yüz Yüze Etkinlik">
-                <span>Yüz Yüze Etkinlik</span>
-              </label>
-              <label class="option-item">
-                <input type="checkbox" name="edu-format" value="Çevrimiçi (Online) Webinar/Eğitim">
-                <span>Çevrimiçi (Online) Webinar/Eğitim</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="input-group">
-            <label for="edu-notes">Eklemek istediğiniz notlar veya atölye materyali/özgeçmişiniz varsa ekleyiniz. (İsteğe Bağlı)</label>
-            <textarea id="edu-notes" placeholder="Cevabınız" rows="3"></textarea>
-          </div>
-
-          <div class="input-group">
-            <label for="edu-location">Bulunduğunuz İl *</label>
-            <input type="text" id="edu-location" required placeholder="Cevabınız">
-          </div>
-
-          <button type="submit" class="btn-filled btn-submit" id="edu-submit-btn">
-            <span>Gönder</span>
-            <div class="loader" id="edu-loader" style="display:none;"></div>
-          </button>
-
-          <div id="edu-form-message" class="message"></div>
-        </form>
+        </section>
       </div>
-    </section>
+    </div>
 
     <!-- Registration Section -->
     <section id="register" class="registration">

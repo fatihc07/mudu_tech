@@ -223,9 +223,54 @@ main {
   padding: 0 3vw;
 }
 
-.sponsors, .registration, .educator {
+.sponsors, .registration {
   padding: 5rem 0;
   text-align: center;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(11, 7, 16, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+.modal-content {
+  background: var(--card-bg);
+  margin: 5% auto;
+  padding: 2rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  width: 90%;
+  max-width: 700px;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.close-modal {
+  color: var(--text-main);
+  position: absolute;
+  right: 25px;
+  top: 15px;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-modal:hover {
+  color: #fff;
+}
+
+.educator-modal-section {
+  padding: 1rem 0;
 }
 
 h2 {
