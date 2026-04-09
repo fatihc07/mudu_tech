@@ -99,3 +99,70 @@ if (form) {
     }
   });
 }
+
+// Educator Form Logic
+const eduForm = document.getElementById('educator-form');
+const eduSubmitBtn = document.getElementById('edu-submit-btn');
+const eduLoader = document.getElementById('edu-loader');
+const eduMessageDiv = document.getElementById('edu-form-message');
+
+if (eduForm) {
+  eduForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const name = document.getElementById('edu-name').value;
+    const email = document.getElementById('edu-email').value;
+    const expertise = document.getElementById('edu-expertise').value;
+    const experience = document.getElementById('edu-experience').value;
+    const linkedin = document.getElementById('edu-linkedin').value;
+
+    // Show loader
+    if (eduSubmitBtn) {
+      const span = eduSubmitBtn.querySelector('span');
+      if (span) span.style.display = 'none';
+      if (eduLoader) eduLoader.style.display = 'block';
+      eduSubmitBtn.disabled = true;
+    }
+    
+    if (eduMessageDiv) {
+      eduMessageDiv.innerHTML = '';
+      eduMessageDiv.className = 'message';
+    }
+
+    try {
+      const { data, error } = await supabase
+        .from('educators')
+        .insert([
+          { 
+            full_name: name, 
+            email: email, 
+            expertise: expertise, 
+            experience: experience, 
+            linkedin_url: linkedin 
+          }
+        ]);
+
+      if (error) throw error;
+
+      if (eduMessageDiv) {
+        eduMessageDiv.innerHTML = 'Başvurunuz alındı! En kısa sürede sizinle iletişime geçeceğiz.';
+        eduMessageDiv.classList.add('success');
+      }
+      eduForm.reset();
+    } catch (error) {
+      console.error('Error:', error);
+      if (eduMessageDiv) {
+        eduMessageDiv.innerHTML = 'Başvuru gönderilirken bir hata oluştu. Lütfen bilgilerinizi kontrol edip tekrar deneyin.';
+        eduMessageDiv.classList.add('error');
+      }
+    } finally {
+      // Hide loader
+      if (eduSubmitBtn) {
+        const span = eduSubmitBtn.querySelector('span');
+        if (span) span.style.display = 'inline';
+        if (eduLoader) eduLoader.style.display = 'none';
+        eduSubmitBtn.disabled = false;
+      }
+    }
+  });
+}

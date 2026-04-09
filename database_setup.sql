@@ -15,5 +15,26 @@ ALTER TABLE registrations ENABLE ROW LEVEL SECURITY;
 -- Create policy to allow anonymous inserts (since users will be unauthenticated when signing up)
 CREATE POLICY "Allow anonymous inserts" ON registrations FOR INSERT TO anon WITH CHECK (true);
 
--- (Optional) Create policy to allow admins to view registrations, if you want only authenticated admins to read.
--- For now, we only need INSERT access.
+-- Educators Table
+CREATE TABLE educators (
+  id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+  full_name text NOT NULL,
+  email text NOT NULL,
+  expertise text NOT NULL,
+  experience text,
+  linkedin_url text,
+  status text DEFAULT 'pending',
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- Enable RLS for educators
+ALTER TABLE educators ENABLE ROW LEVEL SECURITY;
+
+-- Allow anonymous inserts for educators
+CREATE POLICY "Allow anonymous educator applications" ON educators FOR INSERT TO anon WITH CHECK (true);
+
+-- Allow admins to read all (Assuming we will use a service role or specific admin policy later)
+-- For now, we allow select to everyone for simplicity in the demo dashboard, 
+-- but in production, we should restrict this to authenticated admins.
+CREATE POLICY "Enable read for everyone" ON educators FOR SELECT USING (true);
+CREATE POLICY "Enable read for registrations" ON registrations FOR SELECT USING (true);

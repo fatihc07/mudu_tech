@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MUDU TECH | Yönetici Paneli</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/style.css">
+  <style>
+    .admin-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .tab-btn {
+      background: rgba(255,255,255,0.05);
+      border: none;
+      color: var(--text-main);
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .tab-btn.active {
+      background: var(--accent-pink);
+      color: #fff;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    .data-table th, .data-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .data-table th {
+      color: var(--accent-pink);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.8rem;
+    }
+    .data-table tr:hover {
+      background: rgba(255,255,255,0.02);
+    }
+    #login-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-dark);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .login-box {
+      background: var(--card-bg);
+      padding: 3rem;
+      border-radius: 16px;
+      border: 1px solid var(--accent-pink);
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div id="login-screen">
+    <div class="login-box">
+      <h2>Yönetici Girişi</h2>
+      <p style="margin-bottom: 2rem;">Lütfen giriş yapın.</p>
+      <div class="input-group" style="text-align: left;">
+        <label>Admin Şifresi</label>
+        <input type="password" id="admin-pass" placeholder="Şifrenizi girin">
+      </div>
+      <button class="btn-filled" style="width: 100%;" id="login-btn">Giriş Yap</button>
+      <p id="login-error" style="color: red; margin-top: 1rem; font-size: 0.8rem;"></p>
+    </div>
+  </div>
+
+  <div class="admin-container" id="admin-content" style="display: none;">
+    <header class="admin-header">
+      <h1>MUDU TECH Admin</h1>
+      <a href="index.html" style="color: var(--text-main); text-decoration: none;">&larr; Siteye Dön</a>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="registrations">Etkinlik Kayıtları</button>
+      <button class="tab-btn" data-tab="educators">Eğitimci Başvuruları</button>
+    </div>
+
+    <div id="table-container">
+      <p>Veriler yükleniyor...</p>
+    </div>
+  </div>
+
+  <script type="module" src="./src/admin.js"></script>
+</body>
+</html>

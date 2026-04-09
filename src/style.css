@@ -210,7 +210,7 @@ main {
   padding: 0 3vw;
 }
 
-.sponsors, .registration {
+.sponsors, .registration, .educator {
   padding: 5rem 0;
   text-align: center;
 }
@@ -285,7 +285,8 @@ h2 {
   font-size: 0.9rem;
 }
 .input-group input,
-.input-group select {
+.input-group select,
+.input-group textarea {
   width: 100%;
   padding: 1rem;
   border-radius: 8px;
@@ -296,9 +297,11 @@ h2 {
   font-size: 1rem;
   outline: none;
   transition: border-color 0.3s;
+  resize: vertical;
 }
 .input-group input:focus,
-.input-group select:focus {
+.input-group select:focus,
+.input-group textarea:focus {
   border-color: var(--accent-pink);
 }
 
@@ -322,9 +325,25 @@ h2 {
 
 footer {
   text-align: center;
-  padding: 3rem;
+  padding: 5rem;
   color: var(--text-main);
   font-size: 0.9rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.admin-link {
+  margin-top: 2rem;
+}
+
+.admin-link a {
+  color: rgba(255,255,255,0.3);
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: color 0.3s;
+}
+
+.admin-link a:hover {
+  color: var(--accent-pink);
 }
 
 .loader {
