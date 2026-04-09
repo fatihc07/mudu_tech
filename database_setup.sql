@@ -20,9 +20,13 @@ CREATE TABLE educators (
   id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
   full_name text NOT NULL,
   email text NOT NULL,
-  expertise text NOT NULL,
-  experience text,
-  linkedin_url text,
+  phone text NOT NULL,
+  workshop_title text NOT NULL,
+  workshop_description text NOT NULL,
+  duration text NOT NULL,
+  format text NOT NULL,
+  notes text,
+  location text NOT NULL,
   status text DEFAULT 'pending',
   created_at timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );

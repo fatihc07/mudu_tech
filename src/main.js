@@ -112,9 +112,19 @@ if (eduForm) {
     
     const name = document.getElementById('edu-name').value;
     const email = document.getElementById('edu-email').value;
-    const expertise = document.getElementById('edu-expertise').value;
-    const experience = document.getElementById('edu-experience').value;
-    const linkedin = document.getElementById('edu-linkedin').value;
+    const phone = document.getElementById('edu-phone').value;
+    const title = document.getElementById('edu-title').value;
+    const desc = document.getElementById('edu-desc').value;
+    const location = document.getElementById('edu-location').value;
+    const notes = document.getElementById('edu-notes').value;
+
+    // Get Radio value (Duration)
+    const duration = eduForm.querySelector('input[name="edu-duration"]:checked')?.value || '';
+
+    // Get Checkbox values (Format)
+    const formats = Array.from(eduForm.querySelectorAll('input[name="edu-format"]:checked'))
+      .map(cb => cb.value)
+      .join(', ');
 
     // Show loader
     if (eduSubmitBtn) {
@@ -136,23 +146,27 @@ if (eduForm) {
           { 
             full_name: name, 
             email: email, 
-            expertise: expertise, 
-            experience: experience, 
-            linkedin_url: linkedin 
+            phone: phone,
+            workshop_title: title,
+            workshop_description: desc,
+            duration: duration,
+            format: formats,
+            location: location,
+            notes: notes
           }
         ]);
 
       if (error) throw error;
 
       if (eduMessageDiv) {
-        eduMessageDiv.innerHTML = 'Başvurunuz alındı! En kısa sürede sizinle iletişime geçeceğiz.';
+        eduMessageDiv.innerHTML = 'Başvurunuz alındı! Teşekkür ederiz.';
         eduMessageDiv.classList.add('success');
       }
       eduForm.reset();
     } catch (error) {
       console.error('Error:', error);
       if (eduMessageDiv) {
-        eduMessageDiv.innerHTML = 'Başvuru gönderilirken bir hata oluştu. Lütfen bilgilerinizi kontrol edip tekrar deneyin.';
+        eduMessageDiv.innerHTML = 'Hata oluştu. Lütfen tekrar deneyin.';
         eduMessageDiv.classList.add('error');
       }
     } finally {

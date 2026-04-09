@@ -107,32 +107,74 @@
 
         <form id="educator-form">
           <div class="input-group">
-            <label for="edu-name">Ad Soyad</label>
-            <input type="text" id="edu-name" required placeholder="Örn: Dr. Ayşe Yılmaz">
+            <label for="edu-name">Adınız Soyadınız *</label>
+            <input type="text" id="edu-name" required placeholder="Cevabınız">
           </div>
 
           <div class="input-group">
-            <label for="edu-email">E-posta Adresi</label>
-            <input type="email" id="edu-email" required placeholder="ayse@uzmanlik.com">
+            <label for="edu-email">E-posta Adresiniz *</label>
+            <input type="email" id="edu-email" required placeholder="Cevabınız">
           </div>
 
           <div class="input-group">
-            <label for="edu-expertise">Uzmanlık Alanı / Konu</label>
-            <input type="text" id="edu-expertise" required placeholder="Örn: Blockchain, Siber Güvenlik, DevOps">
+            <label for="edu-phone">Telefon Numaranız *</label>
+            <input type="tel" id="edu-phone" required placeholder="Cevabınız">
           </div>
 
           <div class="input-group">
-            <label for="edu-experience">Deneyim ve Kısa Özgeçmiş</label>
-            <textarea id="edu-experience" required placeholder="Kısaca kendinizden ve projelerinizden bahsedin..." rows="4"></textarea>
+            <label for="edu-title">Önerdiğiniz Atölye Konusu/Başlığı *</label>
+            <input type="text" id="edu-title" required placeholder="Cevabınız">
           </div>
 
           <div class="input-group">
-            <label for="edu-linkedin">LinkedIn Profil URL (Opsiyonel)</label>
-            <input type="url" id="edu-linkedin" placeholder="https://linkedin.com/in/profil-adiniz">
+            <label for="edu-desc">Atölye Konusunun Kısa Açıklaması (Hedef kitle, amaç ve içerik özeti) *</label>
+            <textarea id="edu-desc" required placeholder="Cevabınız" rows="4"></textarea>
+          </div>
+
+          <div class="input-group radio-group">
+            <label>Öngördüğünüz Eğitim Süresi Ne Kadar Olmalıdır? *</label>
+            <div class="options">
+              <label class="option-item">
+                <input type="radio" name="edu-duration" value="Yarım Gün" required>
+                <span>Yarım Gün (Örn: 3-4 saat)</span>
+              </label>
+              <label class="option-item">
+                <input type="radio" name="edu-duration" value="Tam Gün">
+                <span>Tam Gün (Örn: 6-8 saat)</span>
+              </label>
+              <label class="option-item">
+                <input type="radio" name="edu-duration" value="2 Gün">
+                <span>2 Gün (Toplam 12-16 saat)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="input-group checkbox-group">
+            <label>Atölyeyi Hangi Formatlarda Gerçekleştirmeyi Tercih Edersiniz? *</label>
+            <div class="options">
+              <label class="option-item">
+                <input type="checkbox" name="edu-format" value="Yüz Yüze Etkinlik">
+                <span>Yüz Yüze Etkinlik</span>
+              </label>
+              <label class="option-item">
+                <input type="checkbox" name="edu-format" value="Çevrimiçi (Online) Webinar/Eğitim">
+                <span>Çevrimiçi (Online) Webinar/Eğitim</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="edu-notes">Eklemek istediğiniz notlar veya atölye materyali/özgeçmişiniz varsa ekleyiniz. (İsteğe Bağlı)</label>
+            <textarea id="edu-notes" placeholder="Cevabınız" rows="3"></textarea>
+          </div>
+
+          <div class="input-group">
+            <label for="edu-location">Bulunduğunuz İl *</label>
+            <input type="text" id="edu-location" required placeholder="Cevabınız">
           </div>
 
           <button type="submit" class="btn-filled btn-submit" id="edu-submit-btn">
-            <span>Başvuruyu Gönder</span>
+            <span>Gönder</span>
             <div class="loader" id="edu-loader" style="display:none;"></div>
           </button>
 

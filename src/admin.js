@@ -69,10 +69,11 @@ function renderTable(type, data) {
     } else {
         html += `
             <th>Ad Soyad</th>
-            <th>E-posta</th>
-            <th>Uzmanlık</th>
-            <th>Deneyim</th>
-            <th>LinkedIn</th>
+            <th>İletişim</th>
+            <th>Atölye Başlığı</th>
+            <th>Detaylar</th>
+            <th>Süre / Format</th>
+            <th>Konum</th>
             <th>Tarih</th>
         `;
     }
@@ -94,11 +95,12 @@ function renderTable(type, data) {
         } else {
             html += `
                 <tr>
-                    <td>${item.full_name}</td>
-                    <td>${item.email}</td>
-                    <td>${item.expertise}</td>
-                    <td title="${item.experience}">${item.experience ? item.experience.substring(0, 50) + '...' : '-'}</td>
-                    <td>${item.linkedin_url ? `<a href="${item.linkedin_url}" target="_blank">Profil</a>` : '-'}</td>
+                    <td><b>${item.full_name}</b></td>
+                    <td>${item.email}<br><small>${item.phone}</small></td>
+                    <td>${item.workshop_title}</td>
+                    <td title="${item.workshop_description}">${item.workshop_description ? item.workshop_description.substring(0, 30) + '...' : '-'}</td>
+                    <td>${item.duration}<br><small>${item.format}</small></td>
+                    <td>${item.location}</td>
                     <td>${date}</td>
                 </tr>
             `;
