@@ -181,6 +181,54 @@ if (eduForm) {
   });
 }
 
+// Navbar Scroll & Section Highlighting
+const navLinks = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll('section, .hero-card');
+
+const observerOptions = {
+  threshold: 0.3
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.getAttribute('id') || 'home';
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${id}`) {
+          link.classList.add('active');
+        }
+      });
+      
+      // Trigger animation
+      if (entry.target.classList.contains('slide-up')) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    }
+  });
+}, observerOptions);
+
+sections.forEach(section => observer.observe(section));
+
+// Program Tabs Logic
+const programTabBtns = document.querySelectorAll('.program-tabs .tab-btn');
+const dayContents = document.querySelectorAll('.day-content');
+
+programTabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const day = btn.dataset.day;
+    
+    // Reset active states
+    programTabBtns.forEach(b => b.classList.remove('active'));
+    dayContents.forEach(c => c.classList.remove('active'));
+    
+    // Set active
+    btn.classList.add('active');
+    document.getElementById(day).classList.add('active');
+  });
+});
+
 // Educator Modal Logic
 const modal = document.getElementById("educator-modal");
 const openBtn = document.getElementById("open-educator-btn");
