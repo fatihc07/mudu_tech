@@ -11,10 +11,15 @@ const tabButtons = document.querySelectorAll('.tab-btn');
 const speakerFormContainer = document.getElementById('speaker-form-container');
 const programFormContainer = document.getElementById('program-form-container');
 const sponsorFormContainer = document.getElementById('sponsor-form-container');
+const adminSearch = document.getElementById('admin-search');
+const adminStats = document.getElementById('admin-stats');
 
 const addSpeakerForm = document.getElementById('add-speaker-form');
 const addProgramForm = document.getElementById('add-program-form');
 const addSponsorForm = document.getElementById('add-sponsor-form');
+
+let currentData = [];
+let currentType = 'registrations';
 
 // Simple Admin Auth
 const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || 'mudu2026';
@@ -36,6 +41,7 @@ tabButtons.forEach(btn => {
         btn.classList.add('active');
         
         const type = btn.dataset.tab;
+        currentType = type;
         
         // Hide all form panels
         [speakerFormContainer, programFormContainer, sponsorFormContainer].forEach(p => {
@@ -47,9 +53,28 @@ tabButtons.forEach(btn => {
         if (type === 'program' && programFormContainer) programFormContainer.style.display = 'block';
         if (type === 'sponsors' && sponsorFormContainer) sponsorFormContainer.style.display = 'block';
         
+        // Reset Search
+        if (adminSearch) adminSearch.value = '';
+        
         fetchData(type);
     });
 });
+
+// Search Logic
+if (adminSearch) {
+    adminSearch.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        const filtered = currentData.filter(item => {
+            return (
+                item.full_name?.toLowerCase().includes(term) ||
+                item.email?.toLowerCase().includes(term) ||
+                item.department?.toLowerCase().includes(term) ||
+                item.workshop_title?.toLowerCase().includes(term)
+            );
+        });
+        renderTable(currentType, filtered, true);
+    });
+}
 
 async function fetchData(table) {
     tableContainer.innerHTML = '<p>Veriler yükleniyor...</p>';
@@ -62,23 +87,54 @@ async function fetchData(table) {
 
         if (error) throw error;
 
-        if (!data || data.length === 0) {
+        currentData = data || [];
+        
+        if (table === 'registrations') {
+            renderStats(currentData);
+        } else {
+            if (adminStats) adminStats.innerHTML = '';
+        }
+
+        if (currentData.length === 0) {
             tableContainer.innerHTML = '<p>Henüz veri bulunmuyor.</p>';
             return;
         }
 
-        renderTable(table, data);
+        renderTable(table, currentData);
     } catch (error) {
         console.error('Fetch error:', error);
         tableContainer.innerHTML = `<p style="color: red;">Veri çekilirken hata oluştu: ${error.message}</p>`;
     }
 }
 
-function renderTable(type, data) {
+function renderStats(data) {
+    if (!adminStats) return;
+    
+    const total = data.length;
+    const interests = data.reduce((acc, curr) => {
+        acc[curr.survey_interest] = (acc[curr.survey_interest] || 0) + 1;
+        return acc;
+    }, {});
+    
+    const topInterest = Object.entries(interests).sort((a,b) => b[1] - a[1])[0] || ['-', 0];
+
+    adminStats.innerHTML = `
+        <div class="stat-card" style="background: rgba(182, 36, 142, 0.1); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--accent-pink);">
+           <small style="color: var(--accent-pink); font-weight: 700;">TOPLAM KAYIT</small>
+           <h2 style="font-size: 2rem; margin-top: 0.5rem;">${total}</h2>
+        </div>
+        <div class="stat-card" style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 12px;">
+           <small style="color: var(--text-main);">EN ÇOK İLGİ</small>
+           <h2 style="font-size: 1.2rem; margin-top: 0.5rem;">${topInterest[0]} (${topInterest[1]})</h2>
+        </div>
+    `;
+}
+
+function renderTable(type, data, isFilter = false) {
     let html = `<table class="data-table"><thead><tr>`;
     
     if (type === 'registrations') {
-        html += `<th>Ad Soyad</th><th>E-posta</th><th>Bölüm</th><th>İlgi</th><th>Tarih</th>`;
+        html += `<th>Ad Soyad</th><th>E-posta</th><th>Okul / Şirket</th><th>İlgi</th><th>Tarih</th>`;
     } else if (type === 'educators') {
         html += `<th>Ad Soyad</th><th>İletişim</th><th>Atölye</th><th>Detay</th><th>Format</th><th>Konum</th><th>Tarih</th>`;
     } else if (type === 'speakers') {
