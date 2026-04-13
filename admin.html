@@ -112,6 +112,34 @@
       <button class="tab-btn" data-tab="speakers">Konuşmacı Yönetimi</button>
       <button class="tab-btn" data-tab="program">Program Yönetimi</button>
       <button class="tab-btn" data-tab="sponsors">Sponsor Yönetimi</button>
+      <button class="tab-btn" data-tab="team">Ekip Yönetimi</button>
+    </div>
+
+    <!-- Team Form -->
+    <div id="team-form-container" class="form-panel" style="display: none;">
+      <h3 style="margin-bottom: 1.5rem; color: #fff;">Yeni Ekip Üyesi Ekle</h3>
+      <form id="add-team-form">
+        <div class="form-grid">
+          <div class="input-group">
+            <label>Ad Soyad</label>
+            <input type="text" id="tm-name" required>
+          </div>
+          <div class="input-group">
+            <label>Kurum / Görev</label>
+            <input type="text" id="tm-institution" required placeholder="Örn: MUDU Üni. Öğrencisi">
+          </div>
+          <div class="input-group">
+             <label>Fotoğraf Seç</label>
+             <input type="file" id="tm-image" accept="image/*">
+          </div>
+          <div class="input-group">
+            <label>Veya Fotoğraf URL</label>
+            <input type="text" id="tm-image-url">
+          </div>
+        </div>
+        <button type="submit" class="btn-filled">Kaydet</button>
+        <div id="tm-message" class="message"></div>
+      </form>
     </div>
 
     <!-- Stats & Filters Container -->

@@ -105,3 +105,19 @@ DROP POLICY IF EXISTS "Allow public read for sponsors" ON sponsors;
 CREATE POLICY "Allow public read for sponsors" ON sponsors FOR SELECT USING (true);
 DROP POLICY IF EXISTS "Allow admin inserts for sponsors" ON sponsors;
 CREATE POLICY "Allow admin inserts for sponsors" ON sponsors FOR INSERT TO anon WITH CHECK (true);
+
+-- 9. CREATE TEAM_MEMBERS TABLE
+CREATE TABLE IF NOT EXISTS team_members (
+  id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+  full_name text NOT NULL,
+  institution text NOT NULL,
+  image_url text,
+  order_index int DEFAULT 0,
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+ALTER TABLE team_members ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Allow public read for team" ON team_members;
+CREATE POLICY "Allow public read for team" ON team_members FOR SELECT USING (true);
+DROP POLICY IF EXISTS "Allow admin inserts for team" ON team_members;
+CREATE POLICY "Allow admin inserts for team" ON team_members FOR INSERT TO anon WITH CHECK (true);

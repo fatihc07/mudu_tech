@@ -324,6 +324,33 @@ async function fetchAndRenderSponsors() {
 fetchAndRenderProgram();
 fetchAndRenderSponsors();
 
+async function fetchAndRenderTeam() {
+  const container = document.getElementById('team-container');
+  if (!container) return;
+
+  try {
+    const { data, error } = await supabase.from('team_members').select('*').order('order_index', { ascending: true });
+    if (error) throw error;
+
+    if (data.length === 0) {
+      container.innerHTML = '<p>Henüz ekip üyesi eklenmedi.</p>';
+      return;
+    }
+
+    container.innerHTML = data.map(member => `
+      <div class="team-card" style="display: flex; align-items: center; gap: 1rem; background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+        <img src="${member.image_url || 'https://via.placeholder.com/100'}" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+        <div style="text-align: left;">
+          <h4 style="color: #fff; font-size: 1rem;">${member.full_name}</h4>
+          <small style="color: var(--accent-pink); font-size: 0.8rem;">${member.institution}</small>
+        </div>
+      </div>
+    `).join('');
+  } catch (err) { console.error('Team fetch error:', err); }
+}
+
+fetchAndRenderTeam();
+
 // Program Tabs Logic
 const programTabBtns = document.querySelectorAll('.program-tabs .tab-btn');
 const dayContents = document.querySelectorAll('.day-content');
