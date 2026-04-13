@@ -815,3 +815,24 @@ footer {
   .countdown { gap: 1rem; }
   .time-box span { font-size: 1.8rem; }
 }
+
+/* Admin Form Helpers */
+.form-panel {
+  margin-bottom: 3rem;
+  background: rgba(255,255,255,0.02);
+  padding: 2.5rem;
+  border-radius: 20px;
+  border: 1px solid rgba(182, 36, 142, 0.2);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .form-grid { grid-template-columns: 1fr; }
+}

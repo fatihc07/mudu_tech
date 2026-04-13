@@ -72,5 +72,36 @@ CREATE POLICY "Allow public read for speakers" ON speakers FOR SELECT USING (tru
 
 DROP POLICY IF EXISTS "Allow admin inserts for speakers" ON speakers;
 CREATE POLICY "Allow admin inserts for speakers" ON speakers FOR INSERT TO anon WITH CHECK (true);
--- Note: In a real app, 'FOR INSERT' should be restricted to authenticated admins.
--- For now, following the pattern of this project.
+
+-- 7. CREATE PROGRAM_ITEMS TABLE
+CREATE TABLE IF NOT EXISTS program_items (
+  id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+  day text NOT NULL, -- 'day1' or 'day2'
+  time text NOT NULL,
+  title text NOT NULL,
+  description text,
+  image_url text, -- Poster/Afiş URL
+  tag text, -- e.g. 'Workshop', 'Keynote'
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+ALTER TABLE program_items ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Allow public read for program" ON program_items;
+CREATE POLICY "Allow public read for program" ON program_items FOR SELECT USING (true);
+DROP POLICY IF EXISTS "Allow admin inserts for program" ON program_items;
+CREATE POLICY "Allow admin inserts for program" ON program_items FOR INSERT TO anon WITH CHECK (true);
+
+-- 8. CREATE SPONSORS TABLE
+CREATE TABLE IF NOT EXISTS sponsors (
+  id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+  name text NOT NULL,
+  logo_url text,
+  tier text DEFAULT 'Katılımcı', -- e.g. 'Platin', 'Altın', 'Katılımcı'
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+ALTER TABLE sponsors ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Allow public read for sponsors" ON sponsors;
+CREATE POLICY "Allow public read for sponsors" ON sponsors FOR SELECT USING (true);
+DROP POLICY IF EXISTS "Allow admin inserts for sponsors" ON sponsors;
+CREATE POLICY "Allow admin inserts for sponsors" ON sponsors FOR INSERT TO anon WITH CHECK (true);

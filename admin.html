@@ -110,39 +110,116 @@
       <button class="tab-btn active" data-tab="registrations">Etkinlik Kayıtları</button>
       <button class="tab-btn" data-tab="educators">Eğitimci Başvuruları</button>
       <button class="tab-btn" data-tab="speakers">Konuşmacı Yönetimi</button>
+      <button class="tab-btn" data-tab="program">Program Yönetimi</button>
+      <button class="tab-btn" data-tab="sponsors">Sponsor Yönetimi</button>
     </div>
 
-    <div id="speaker-form-container" style="display: none; margin-bottom: 3rem; background: rgba(255,255,255,0.02); padding: 2rem; border-radius: 12px; border: 1px solid var(--accent-pink);">
+    <!-- Speaker Form -->
+    <div id="speaker-form-container" class="form-panel" style="display: none;">
       <h3 style="margin-bottom: 1.5rem; color: #fff;">Yeni Konuşmacı Ekle</h3>
       <form id="add-speaker-form">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="form-grid">
           <div class="input-group">
             <label>Ad Soyad</label>
-            <input type="text" id="sp-name" required placeholder="Örn: Caner Tekin">
+            <input type="text" id="sp-name" required>
           </div>
           <div class="input-group">
             <label>Ünvan</label>
-            <input type="text" id="sp-title" required placeholder="Örn: Senior AI Engineer">
+            <input type="text" id="sp-title" required>
           </div>
           <div class="input-group">
             <label>Şirket</label>
-            <input type="text" id="sp-company" required placeholder="Örn: Global Tech">
+            <input type="text" id="sp-company" required>
           </div>
           <div class="input-group">
             <label>LinkedIn URL</label>
-            <input type="url" id="sp-linkedin" placeholder="https://linkedin.com/in/...">
+            <input type="url" id="sp-linkedin">
           </div>
           <div class="input-group">
-             <label>Fotoğraf Seç (Opsiyonel)</label>
+             <label>Fotoğraf Seç</label>
              <input type="file" id="sp-image" accept="image/*">
           </div>
           <div class="input-group">
-            <label>Veya Fotoğraf URL</label>
-            <input type="text" id="sp-image-url" placeholder="https://...">
+            <label>Veya URL</label>
+            <input type="text" id="sp-image-url">
           </div>
         </div>
-        <button type="submit" class="btn-filled" id="sp-submit-btn">Konuşmacıyı Kaydet</button>
+        <button type="submit" class="btn-filled">Kaydet</button>
         <div id="sp-message" class="message"></div>
+      </form>
+    </div>
+
+    <!-- Program Form -->
+    <div id="program-form-container" class="form-panel" style="display: none;">
+      <h3 style="margin-bottom: 1.5rem; color: #fff;">Yeni Program Akışı Ekle</h3>
+      <form id="add-program-form">
+        <div class="form-grid">
+          <div class="input-group">
+            <label>Gün Seç</label>
+            <select id="pg-day" required>
+              <option value="day1">14 Mayıs (1. Gün)</option>
+              <option value="day2">15 Mayıs (2. Gün)</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label>Saat</label>
+            <input type="text" id="pg-time" placeholder="Örn: 10:00" required>
+          </div>
+          <div class="input-group">
+            <label>Başlık</label>
+            <input type="text" id="pg-title" required>
+          </div>
+          <div class="input-group">
+            <label>Etiket</label>
+            <input type="text" id="pg-tag" placeholder="Örn: Workshop">
+          </div>
+          <div class="input-group" style="grid-column: span 2;">
+            <label>Açıklama</label>
+            <textarea id="pg-desc" rows="2"></textarea>
+          </div>
+          <div class="input-group">
+             <label>Afiş/Poster Seç</label>
+             <input type="file" id="pg-image" accept="image/*">
+          </div>
+          <div class="input-group">
+            <label>Veya URL</label>
+            <input type="text" id="pg-image-url">
+          </div>
+        </div>
+        <button type="submit" class="btn-filled">Kaydet</button>
+        <div id="pg-message" class="message"></div>
+      </form>
+    </div>
+
+    <!-- Sponsor Form -->
+    <div id="sponsor-form-container" class="form-panel" style="display: none;">
+      <h3 style="margin-bottom: 1.5rem; color: #fff;">Yeni Sponsor Ekle</h3>
+      <form id="add-sponsor-form">
+        <div class="form-grid">
+          <div class="input-group">
+            <label>Sponsor Adı</label>
+            <input type="text" id="sn-name" required>
+          </div>
+          <div class="input-group">
+            <label>Kategori (Tier)</label>
+            <select id="sn-tier" required>
+              <option value="Platin">Platin</option>
+              <option value="Altın">Altın</option>
+              <option value="Gümüş">Gümüş</option>
+              <option value="Katılımcı">Katılımcı Firma</option>
+            </select>
+          </div>
+          <div class="input-group">
+             <label>Logo Seç</label>
+             <input type="file" id="sn-logo" accept="image/*">
+          </div>
+          <div class="input-group">
+            <label>Veya Logo URL</label>
+            <input type="text" id="sn-logo-url">
+          </div>
+        </div>
+        <button type="submit" class="btn-filled">Kaydet</button>
+        <div id="sn-message" class="message"></div>
       </form>
     </div>
 

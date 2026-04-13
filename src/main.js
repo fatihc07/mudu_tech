@@ -253,6 +253,77 @@ async function fetchAndRenderSpeakers() {
 
 fetchAndRenderSpeakers();
 
+async function fetchAndRenderProgram() {
+  try {
+    const { data, error } = await supabase.from('program_items').select('*').order('time', { ascending: true });
+    if (error) throw error;
+    
+    ['day1', 'day2'].forEach(day => {
+       const container = document.getElementById(`program-${day}`);
+       if(!container) return;
+       const dayData = data.filter(i => i.day === day);
+       
+       if (dayData.length === 0) {
+         container.innerHTML = '<p style="padding-left: 20px;">Henüz bu gün için program eklenmedi.</p>';
+         return;
+       }
+
+       container.innerHTML = dayData.map(item => `
+         <div class="timeline-item">
+           <div class="time">${item.time}</div>
+           <div class="event">
+             <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;">
+               <div>
+                  <h3>${item.title}</h3>
+                  <p>${item.description || ''}</p>
+                  ${item.tag ? `<span class="tag">${item.tag}</span>` : ''}
+               </div>
+               ${item.image_url ? `
+                 <div class="event-poster" onclick="window.open('${item.image_url}', '_blank')" style="cursor: pointer;">
+                   <img src="${item.image_url}" style="width: 80px; height: 110px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+                   <small style="display: block; text-align: center; color: var(--accent-pink); margin-top: 4px; font-size: 0.7rem;">Afişi Gör</small>
+                 </div>
+               ` : ''}
+             </div>
+           </div>
+         </div>
+       `).join('');
+    });
+  } catch (err) { console.error('Program fetch error:', err); }
+}
+
+async function fetchAndRenderSponsors() {
+  const container = document.getElementById('sponsors-dynamic-container');
+  if (!container) return;
+
+  try {
+    const { data, error } = await supabase.from('sponsors').select('*').order('created_at', { ascending: true });
+    if (error) throw error;
+
+    const tiers = ['Platin', 'Altın', 'Gümüş', 'Katılımcı'];
+    let html = '';
+
+    tiers.forEach(tier => {
+       const tierData = data.filter(s => s.tier === tier);
+       if (tierData.length > 0) {
+         html += `<h3 class="section-subheading">${tier} ${tier === 'Katılımcı' ? 'Firmalar' : 'Sponsorlar'}</h3>`;
+         html += `<div class="sponsor-grid">`;
+         html += tierData.map(s => `
+           <div class="sponsor-item">
+             <img src="${s.logo_url}" alt="${s.name}" style="max-height: 50px; max-width: 100%; filter: grayscale(1) invert(1); opacity: 0.7; transition: all 0.3s;">
+           </div>
+         `).join('');
+         html += `</div>`;
+       }
+    });
+
+    container.innerHTML = html || '<p>Henüz sponsor eklenmedi.</p>';
+  } catch (err) { console.error('Sponsor fetch error:', err); }
+}
+
+fetchAndRenderProgram();
+fetchAndRenderSponsors();
+
 // Program Tabs Logic
 const programTabBtns = document.querySelectorAll('.program-tabs .tab-btn');
 const dayContents = document.querySelectorAll('.day-content');
