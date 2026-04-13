@@ -52,3 +52,25 @@ CREATE POLICY "Enable read for everyone" ON educators FOR SELECT USING (true);
 
 DROP POLICY IF EXISTS "Enable read for registrations" ON registrations;
 CREATE POLICY "Enable read for registrations" ON registrations FOR SELECT USING (true);
+
+-- 6. CREATE SPEAKERS TABLE
+CREATE TABLE IF NOT EXISTS speakers (
+  id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+  full_name text NOT NULL,
+  title text NOT NULL,
+  company text NOT NULL,
+  image_url text, -- Store public URL of the uploaded image
+  linkedin_url text,
+  order_index int DEFAULT 0,
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+ALTER TABLE speakers ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Allow public read for speakers" ON speakers;
+CREATE POLICY "Allow public read for speakers" ON speakers FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Allow admin inserts for speakers" ON speakers;
+CREATE POLICY "Allow admin inserts for speakers" ON speakers FOR INSERT TO anon WITH CHECK (true);
+-- Note: In a real app, 'FOR INSERT' should be restricted to authenticated admins.
+-- For now, following the pattern of this project.

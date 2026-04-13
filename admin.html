@@ -109,6 +109,41 @@
     <div class="tabs">
       <button class="tab-btn active" data-tab="registrations">Etkinlik Kayıtları</button>
       <button class="tab-btn" data-tab="educators">Eğitimci Başvuruları</button>
+      <button class="tab-btn" data-tab="speakers">Konuşmacı Yönetimi</button>
+    </div>
+
+    <div id="speaker-form-container" style="display: none; margin-bottom: 3rem; background: rgba(255,255,255,0.02); padding: 2rem; border-radius: 12px; border: 1px solid var(--accent-pink);">
+      <h3 style="margin-bottom: 1.5rem; color: #fff;">Yeni Konuşmacı Ekle</h3>
+      <form id="add-speaker-form">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="input-group">
+            <label>Ad Soyad</label>
+            <input type="text" id="sp-name" required placeholder="Örn: Caner Tekin">
+          </div>
+          <div class="input-group">
+            <label>Ünvan</label>
+            <input type="text" id="sp-title" required placeholder="Örn: Senior AI Engineer">
+          </div>
+          <div class="input-group">
+            <label>Şirket</label>
+            <input type="text" id="sp-company" required placeholder="Örn: Global Tech">
+          </div>
+          <div class="input-group">
+            <label>LinkedIn URL</label>
+            <input type="url" id="sp-linkedin" placeholder="https://linkedin.com/in/...">
+          </div>
+          <div class="input-group">
+             <label>Fotoğraf Seç (Opsiyonel)</label>
+             <input type="file" id="sp-image" accept="image/*">
+          </div>
+          <div class="input-group">
+            <label>Veya Fotoğraf URL</label>
+            <input type="text" id="sp-image-url" placeholder="https://...">
+          </div>
+        </div>
+        <button type="submit" class="btn-filled" id="sp-submit-btn">Konuşmacıyı Kaydet</button>
+        <div id="sp-message" class="message"></div>
+      </form>
     </div>
 
     <div id="table-container">

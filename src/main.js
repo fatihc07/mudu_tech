@@ -211,6 +211,48 @@ const observer = new IntersectionObserver((entries) => {
 
 sections.forEach(section => observer.observe(section));
 
+// Dynamic Speakers Fetching
+async function fetchAndRenderSpeakers() {
+  const container = document.getElementById('speakers-container');
+  if (!container) return;
+
+  try {
+    const { data, error } = await supabase
+      .from('speakers')
+      .select('*')
+      .order('order_index', { ascending: true })
+      .order('created_at', { ascending: true });
+
+    if (error) throw error;
+
+    if (!data || data.length === 0) {
+      container.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Henüz konuşmacı eklenmedi.</p>';
+      return;
+    }
+
+    container.innerHTML = data.map(speaker => `
+      <div class="speaker-card">
+        <div class="speaker-image">
+          <img src="${speaker.image_url || 'https://via.placeholder.com/400x400'}" alt="${speaker.full_name}">
+        </div>
+        <div class="speaker-info">
+          <h3>${speaker.full_name}</h3>
+          <p class="speaker-title">${speaker.title}</p>
+          <p class="speaker-company">${speaker.company}</p>
+          <div class="speaker-socials">
+            ${speaker.linkedin_url ? `<a href="${speaker.linkedin_url}" target="_blank">LinkedIn</a>` : ''}
+          </div>
+        </div>
+      </div>
+    `).join('');
+  } catch (err) {
+    console.error('Error fetching speakers:', err);
+    container.innerHTML = '<p style="color: red; grid-column: 1/-1;">Konuşmacılar yüklenirken hata oluştu.</p>';
+  }
+}
+
+fetchAndRenderSpeakers();
+
 // Program Tabs Logic
 const programTabBtns = document.querySelectorAll('.program-tabs .tab-btn');
 const dayContents = document.querySelectorAll('.day-content');
