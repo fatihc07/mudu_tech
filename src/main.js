@@ -338,11 +338,13 @@ async function fetchAndRenderTeam() {
     }
 
     container.innerHTML = data.map(member => `
-      <div class="team-card" style="display: flex; align-items: center; gap: 1rem; background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
-        <img src="${member.image_url || 'https://via.placeholder.com/100'}" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
-        <div style="text-align: left;">
-          <h4 style="color: #fff; font-size: 1rem;">${member.full_name}</h4>
-          <small style="color: var(--accent-pink); font-size: 0.8rem;">${member.institution}</small>
+      <div class="team-card team-member-card">
+        <div class="team-member-image">
+          <img src="${member.image_url || 'https://via.placeholder.com/150'}" alt="${member.full_name}">
+        </div>
+        <div class="team-member-info">
+          <h4>${member.full_name}</h4>
+          <small>${member.institution}</small>
         </div>
       </div>
     `).join('');
