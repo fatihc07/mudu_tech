@@ -789,7 +789,7 @@ footer {
   padding: 5rem;
   color: var(--text-main);
   font-size: 0.9rem;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .admin-link {
@@ -797,7 +797,7 @@ footer {
 }
 
 .admin-link a {
-  color: rgba(255,255,255,0.3);
+  color: rgba(0, 0, 0, 0.2);
   text-decoration: none;
   font-size: 0.8rem;
   transition: color 0.3s;
