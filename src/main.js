@@ -100,87 +100,6 @@ if (form) {
   });
 }
 
-// Educator Form Logic
-const eduForm = document.getElementById('educator-form');
-const eduSubmitBtn = document.getElementById('edu-submit-btn');
-const eduLoader = document.getElementById('edu-loader');
-const eduMessageDiv = document.getElementById('edu-form-message');
-
-if (eduForm) {
-  eduForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const name = document.getElementById('edu-name').value;
-    const email = document.getElementById('edu-email').value;
-    const phone = document.getElementById('edu-phone').value;
-    const title = document.getElementById('edu-title').value;
-    const desc = document.getElementById('edu-desc').value;
-    const location = document.getElementById('edu-location').value;
-    const notes = document.getElementById('edu-notes').value;
-
-    // Get Radio value (Duration)
-    const duration = eduForm.querySelector('input[name="edu-duration"]:checked')?.value || '';
-
-    // Get Checkbox values (Format)
-    const formats = Array.from(eduForm.querySelectorAll('input[name="edu-format"]:checked'))
-      .map(cb => cb.value)
-      .join(', ');
-
-    // Show loader
-    if (eduSubmitBtn) {
-      const span = eduSubmitBtn.querySelector('span');
-      if (span) span.style.display = 'none';
-      if (eduLoader) eduLoader.style.display = 'block';
-      eduSubmitBtn.disabled = true;
-    }
-    
-    if (eduMessageDiv) {
-      eduMessageDiv.innerHTML = '';
-      eduMessageDiv.className = 'message';
-    }
-
-    try {
-      const { data, error } = await supabase
-        .from('educators')
-        .insert([
-          { 
-            full_name: name, 
-            email: email, 
-            phone: phone,
-            workshop_title: title,
-            workshop_description: desc,
-            duration: duration,
-            format: formats,
-            location: location,
-            notes: notes
-          }
-        ]);
-
-      if (error) throw error;
-
-      if (eduMessageDiv) {
-        eduMessageDiv.innerHTML = 'Başvurunuz alındı! Teşekkür ederiz.';
-        eduMessageDiv.classList.add('success');
-      }
-      eduForm.reset();
-    } catch (error) {
-      console.error('Error:', error);
-      if (eduMessageDiv) {
-        eduMessageDiv.innerHTML = 'Hata oluştu. Lütfen tekrar deneyin.';
-        eduMessageDiv.classList.add('error');
-      }
-    } finally {
-      // Hide loader
-      if (eduSubmitBtn) {
-        const span = eduSubmitBtn.querySelector('span');
-        if (span) span.style.display = 'inline';
-        if (eduLoader) eduLoader.style.display = 'none';
-        eduSubmitBtn.disabled = false;
-      }
-    }
-  });
-}
-
 // Navbar Scroll & Section Highlighting
 const navLinks = document.querySelectorAll('.nav-links a');
 const sections = document.querySelectorAll('section, .hero-card');
@@ -281,7 +200,7 @@ async function fetchAndRenderProgram() {
                ${item.image_url ? `
                  <div class="event-poster" onclick="window.open('${item.image_url}', '_blank')" style="cursor: pointer;">
                    <img src="${item.image_url}" style="width: 80px; height: 110px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
-                   <small style="display: block; text-align: center; color: var(--accent-pink); margin-top: 4px; font-size: 0.7rem;">Afişi Gör</small>
+                   <small style="display: block; text-align: center; color: var(--accent-orange); margin-top: 4px; font-size: 0.7rem;">Afişi Gör</small>
                  </div>
                ` : ''}
              </div>
@@ -369,25 +288,6 @@ programTabBtns.forEach(btn => {
     btn.classList.add('active');
     document.getElementById(day).classList.add('active');
   });
-});
-
-// Educator Modal Logic
-const modal = document.getElementById("educator-modal");
-const openBtn = document.getElementById("open-educator-btn");
-const closeSpan = document.querySelector(".close-modal");
-
-if (openBtn) {
-  openBtn.onclick = function() {
-    modal.style.display = "block";
-    document.body.style.overflow = "hidden";
-  }
-}
-
-if (closeSpan) {
-  closeSpan.onclick = function() {
-    modal.style.display = "none";
-    document.body.style.overflow = "auto";
-  }
 }
 
 window.onclick = function(event) {

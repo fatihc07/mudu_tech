@@ -141,8 +141,6 @@ function renderTable(type, data, isFilter = false) {
     
     if (type === 'registrations') {
         html += `<th>Ad Soyad</th><th>E-posta</th><th>Okul / Şirket</th><th>İlgi</th><th>Tarih</th>`;
-    } else if (type === 'educators') {
-        html += `<th>Ad Soyad</th><th>İletişim</th><th>Atölye</th><th>Detay</th><th>Format</th><th>Konum</th><th>Tarih</th>`;
     } else if (type === 'speakers') {
         html += `<th>Foto</th><th>Ad Soyad</th><th>Ünvan</th><th>Aksiyon</th>`;
     } else if (type === 'program') {
@@ -159,8 +157,6 @@ function renderTable(type, data, isFilter = false) {
         const date = new Date(item.created_at).toLocaleString('tr-TR');
         if (type === 'registrations') {
             html += `<tr><td>${item.full_name}</td><td>${item.email}</td><td>${item.department}</td><td>${item.survey_interest}</td><td>${date}</td></tr>`;
-        } else if (type === 'educators') {
-            html += `<tr><td><b>${item.full_name}</b></td><td>${item.email}</td><td>${item.workshop_title}</td><td title="${item.workshop_description}">${item.workshop_description?.substring(0,20)}...</td><td>${item.format}</td><td>${item.location}</td><td>${date}</td></tr>`;
         } else if (type === 'speakers') {
             html += `<tr><td><img src="${item.image_url}" style="width:30px;height:30px;border-radius:50%"></td><td>${item.full_name}</td><td>${item.title} @ ${item.company}</td><td><button onclick="window.deleteItem('speakers', '${item.id}')" style="background:red;color:white;border:none;padding:5px;border-radius:4px;">Sil</button></td></tr>`;
         } else if (type === 'program') {
