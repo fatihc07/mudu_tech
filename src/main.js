@@ -82,6 +82,15 @@ if (form) {
         messageDiv.classList.add('success');
       }
       form.reset();
+
+      // Close modal after success
+      setTimeout(() => {
+        const regModal = document.getElementById('register-modal');
+        if (regModal) {
+          regModal.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
+      }, 2000);
     } catch (error) {
       console.error('Error:', error);
       if (messageDiv) {
@@ -288,4 +297,33 @@ programTabBtns.forEach(btn => {
     btn.classList.add('active');
     document.getElementById(day).classList.add('active');
   });
+});
+
+// Registration Modal Logic
+const regModal = document.getElementById("register-modal");
+const openRegBtns = document.querySelectorAll(".open-register-btn");
+const closeRegBtn = document.querySelector(".close-register-modal");
+
+openRegBtns.forEach(btn => {
+  btn.onclick = function() {
+    if (regModal) {
+      regModal.style.display = "block";
+      document.body.style.overflow = "hidden";
+    }
+  }
+});
+
+if (closeRegBtn) {
+  closeRegBtn.onclick = function() {
+    regModal.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
+}
+
+window.onclick = function(event) {
+  if (event.target == regModal) {
+    regModal.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
+}
 });

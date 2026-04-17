@@ -38,7 +38,7 @@
         </nav>
         <div class="nav-buttons">
           <a href="admin.html" class="btn-outline nav-btn admin-nav-btn">Yönetici Girişi</a>
-          <a href="#register" class="btn-outline nav-btn">Hemen Kaydol</a>
+          <a href="javascript:void(0)" class="btn-outline nav-btn open-register-btn">Hemen Kaydol</a>
         </div>
       </header>
 
@@ -50,7 +50,7 @@
           ve sınırları aşmanın tam zamanı!</p>
 
         <div class="hero-buttons">
-          <a href="#register" class="btn-filled">Şimdi Kayıt Ol</a>
+          <a href="javascript:void(0)" class="btn-filled open-register-btn">Şimdi Kayıt Ol</a>
           <a href="#sponsors" class="btn-outline">Sponsorlar</a>
         </div>
 
@@ -171,49 +171,54 @@
 
 
 
-    <!-- Registration Section -->
-    <section id="register" class="registration">
-      <div class="form-container slide-up">
-        <h2>Etkinliğe Kayıt Ol</h2>
-        <p>Kontenjanlar dolmadan yerini ayırt.</p>
+    <!-- Registration Modal -->
+    <div id="register-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-register-modal close-modal">&times;</span>
+        <section id="register" class="registration-modal-section">
+          <div class="form-container">
+            <h2>Etkinliğe Kayıt Ol</h2>
+            <p>Kontenjanlar dolmadan yerini ayırt.</p>
 
-        <form id="register-form">
-          <div class="input-group">
-            <label for="name">Ad Soyad</label>
-            <input type="text" id="name" required placeholder="Örn: Ali Yılmaz">
+            <form id="register-form">
+              <div class="input-group">
+                <label for="name">Ad Soyad</label>
+                <input type="text" id="name" required placeholder="Örn: Ali Yılmaz">
+              </div>
+
+              <div class="input-group">
+                <label for="email">E-posta Adresi</label>
+                <input type="email" id="email" required placeholder="ogrenci@universite.edu.tr">
+              </div>
+
+              <div class="input-group">
+                <label for="department">Okul / Şirket</label>
+                <input type="text" id="department" required placeholder="Örn: MUDU Üniversitesi / Nova Tech">
+              </div>
+
+              <div class="input-group">
+                <label for="survey">Seni en çok hangi konu heyecanlandırıyor?</label>
+                <select id="survey" required>
+                  <option value="" disabled selected>Bir seçim yap...</option>
+                  <option value="Yapay Zeka">Yapay Zeka (AI)</option>
+                  <option value="Siber Güvenlik">Siber Güvenlik</option>
+                  <option value="Web/Mobil Geliştirme">Web / Mobil Geliştirme</option>
+                  <option value="Oyun Geliştirme">Oyun Geliştirme</option>
+                  <option value="Diğer">Diğer</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn-filled btn-submit" id="submit-btn">
+                <span>Gönder</span>
+                <div class="loader" id="loader" style="display:none;"></div>
+              </button>
+
+              <div id="form-message" class="message"></div>
+            </form>
           </div>
-
-          <div class="input-group">
-            <label for="email">E-posta Adresi</label>
-            <input type="email" id="email" required placeholder="ogrenci@universite.edu.tr">
-          </div>
-
-          <div class="input-group">
-            <label for="department">Okul / Şirket</label>
-            <input type="text" id="department" required placeholder="Örn: MUDU Üniversitesi / Nova Tech">
-          </div>
-
-          <div class="input-group">
-            <label for="survey">Seni en çok hangi konu heyecanlandırıyor?</label>
-            <select id="survey" required>
-              <option value="" disabled selected>Bir seçim yap...</option>
-              <option value="Yapay Zeka">Yapay Zeka (AI)</option>
-              <option value="Siber Güvenlik">Siber Güvenlik</option>
-              <option value="Web/Mobil Geliştirme">Web / Mobil Geliştirme</option>
-              <option value="Oyun Geliştirme">Oyun Geliştirme</option>
-              <option value="Diğer">Diğer</option>
-            </select>
-          </div>
-
-          <button type="submit" class="btn-filled btn-submit" id="submit-btn">
-            <span>Gönder</span>
-            <div class="loader" id="loader" style="display:none;"></div>
-          </button>
-
-          <div id="form-message" class="message"></div>
-        </form>
+        </section>
       </div>
-    </section>
+    </div>
   </main>
 
   <footer>
