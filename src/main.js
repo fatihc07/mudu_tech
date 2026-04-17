@@ -310,7 +310,7 @@ async function fetchAndRenderSponsors() {
          html += `<div class="sponsor-grid">`;
          html += tierData.map(s => `
            <div class="sponsor-item">
-             <img src="${s.logo_url}" alt="${s.name}" style="max-height: 50px; max-width: 100%; filter: grayscale(1) invert(1); opacity: 0.7; transition: all 0.3s;">
+             <img src="${s.logo_url}" alt="${s.name}" style="max-height: 60px; max-width: 100%; transition: all 0.3s;">
            </div>
          `).join('');
          html += `</div>`;
