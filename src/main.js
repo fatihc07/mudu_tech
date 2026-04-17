@@ -288,11 +288,4 @@ programTabBtns.forEach(btn => {
     btn.classList.add('active');
     document.getElementById(day).classList.add('active');
   });
-}
-
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-    document.body.style.overflow = "auto";
-  }
-}
+});
