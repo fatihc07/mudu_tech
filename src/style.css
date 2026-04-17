@@ -819,15 +819,36 @@ footer {
   h1 { font-size: 3.5rem; }
   .navbar { padding: 1.5rem 2rem; }
   .nav-links { display: none; }
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
 }
+
+@media (max-width: 768px) {
+  main { padding: 0 5vw; }
+  .timeline { padding-left: 0; }
+  .timeline::before { left: 10px; }
+  .timeline-item { padding-left: 30px; }
+  .timeline-item .time { 
+    position: static; 
+    display: block; 
+    margin-bottom: 0.5rem; 
+    color: var(--accent-orange);
+  }
+  .timeline-item::after { left: 4px; }
+  .about-stats { flex-wrap: wrap; gap: 2rem; }
+  .modal-content { width: 95%; margin: 2% auto; padding: 1.5rem; }
+}
+
 @media (max-width: 600px) {
   h1 { font-size: 2.5rem; }
+  .subtitle { font-size: 1rem; }
   .page-frame { padding: 0.5rem; }
-  .hero-card { border-radius: 12px; }
-  .hero-buttons { flex-direction: column; }
+  .hero-card { border-radius: 12px; min-height: 80vh; }
+  .hero-buttons { flex-direction: column; width: 100%; gap: 1rem; }
+  .hero-buttons a { width: 100%; text-align: center; }
   .nav-btn { display: none; }
-  .countdown { gap: 1rem; }
-  .time-box span { font-size: 1.8rem; }
+  .countdown { gap: 0.8rem; }
+  .time-box span { font-size: 1.5rem; }
+  .form-container { padding: 2rem 1.5rem; }
 }
 
 /* Admin Form Helpers */
