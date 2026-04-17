@@ -125,13 +125,13 @@ function renderStats(data) {
     const topInterest = Object.entries(interests).sort((a,b) => b[1] - a[1])[0] || ['-', 0];
 
     adminStats.innerHTML = `
-        <div class="stat-card" style="background: rgba(182, 36, 142, 0.1); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--accent-pink);">
-           <small style="color: var(--accent-pink); font-weight: 700;">TOPLAM KAYIT</small>
-           <h2 style="font-size: 2rem; margin-top: 0.5rem;">${total}</h2>
+        <div class="stat-card" style="background: #fff; padding: 1.5rem; border-radius: 12px; border: 2px solid var(--accent-navy); box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+           <small style="color: var(--accent-navy); font-weight: 800; text-transform: uppercase;">TOPLAM KAYIT</small>
+           <h2 style="font-size: 2.5rem; margin-top: 0.5rem; color: var(--accent-navy);">${total}</h2>
         </div>
-        <div class="stat-card" style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 12px;">
-           <small style="color: var(--text-main);">EN ÇOK İLGİ</small>
-           <h2 style="font-size: 1.2rem; margin-top: 0.5rem;">${topInterest[0]} (${topInterest[1]})</h2>
+        <div class="stat-card" style="background: #fff; padding: 1.5rem; border-radius: 12px; border: 2px solid var(--accent-orange); box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+           <small style="color: var(--accent-orange); font-weight: 800; text-transform: uppercase;">EN ÇOK İLGİ</small>
+           <h2 style="font-size: 1.2rem; margin-top: 0.5rem; color: var(--accent-navy);">${topInterest[0]} (${topInterest[1]})</h2>
         </div>
     `;
 }
