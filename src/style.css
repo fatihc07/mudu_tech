@@ -166,6 +166,20 @@ body {
   padding: 2rem 5%;
 }
 
+.hero-date-badge {
+  background: var(--accent-orange);
+  color: #fff;
+  padding: 0.6rem 1.8rem;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 20px rgba(230, 126, 34, 0.2);
+  display: inline-block;
+  font-family: var(--font-heading);
+}
+
 h1 {
   font-family: var(--font-heading);
   font-size: 5rem;
