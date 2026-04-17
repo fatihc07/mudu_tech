@@ -229,7 +229,7 @@ async function fetchAndRenderSponsors() {
          html += `<div class="sponsor-grid">`;
          html += tierData.map(s => `
            <div class="sponsor-item ${tier === 'Platin' || tier === 'Altın' ? 'featured' : ''}">
-             <img src="${s.logo_url}" alt="${s.name}" style="max-height: ${tier === 'Platin' ? '200px' : (tier === 'Altın' ? '160px' : '100px')}; max-width: 100%; transition: all 0.3s;">
+             <img src="${s.logo_url}" alt="${s.name}" style="max-height: ${tier === 'Platin' ? '200px' : (tier === 'Altın' ? '130px' : '100px')}; max-width: 100%; transition: all 0.3s;">
            </div>
          `).join('');
          html += `</div>`;
