@@ -121,3 +121,22 @@ DROP POLICY IF EXISTS "Allow public read for team" ON team_members;
 CREATE POLICY "Allow public read for team" ON team_members FOR SELECT USING (true);
 DROP POLICY IF EXISTS "Allow admin inserts for team" ON team_members;
 CREATE POLICY "Allow admin inserts for team" ON team_members FOR INSERT TO anon WITH CHECK (true);
+-- 10. CREATE WORKSHOPS TABLE
+CREATE TABLE IF NOT EXISTS workshops (
+  id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+  title text NOT NULL,
+  instructor text NOT NULL,
+  description text,
+  image_url text, -- Workshop Poster URL
+  date_time text NOT NULL,
+  location text NOT NULL,
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+ALTER TABLE workshops ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Allow public read for workshops" ON workshops;
+CREATE POLICY "Allow public read for workshops" ON workshops FOR SELECT USING (true);
+DROP POLICY IF EXISTS "Allow admin inserts for workshops" ON workshops;
+CREATE POLICY "Allow admin inserts for workshops" ON workshops FOR INSERT TO anon WITH CHECK (true);
+DROP POLICY IF EXISTS "Allow admin delete for workshops" ON workshops;
+CREATE POLICY "Allow admin delete for workshops" ON workshops FOR DELETE TO anon USING (true);

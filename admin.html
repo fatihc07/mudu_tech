@@ -111,6 +111,7 @@
       <button class="tab-btn" data-tab="speakers">Konuşmacı Yönetimi</button>
       <button class="tab-btn" data-tab="program">Program Yönetimi</button>
       <button class="tab-btn" data-tab="sponsors">Sponsor Yönetimi</button>
+      <button class="tab-btn" data-tab="workshops">Atölye Yönetimi</button>
       <button class="tab-btn" data-tab="team">Ekip Yönetimi</button>
     </div>
 
@@ -259,7 +260,44 @@
         <div id="sn-message" class="message"></div>
       </form>
     </div>
-
+    <!-- Workshop Form -->
+    <div id="workshop-form-container" class="form-panel" style="display: none;">
+      <h3 style="margin-bottom: 1.5rem; color: #fff;">Yeni Atölye Ekle</h3>
+      <form id="add-workshop-form">
+        <div class="form-grid">
+          <div class="input-group">
+            <label>Atölye Başlığı</label>
+            <input type="text" id="ws-title" required>
+          </div>
+          <div class="input-group">
+            <label>Eğitici/Konuşmacı</label>
+            <input type="text" id="ws-instructor" required>
+          </div>
+          <div class="input-group">
+            <label>Tarih ve Saat</label>
+            <input type="text" id="ws-datetime" placeholder="Örn: 14 Mayıs, 14:00" required>
+          </div>
+          <div class="input-group">
+            <label>Konum</label>
+            <input type="text" id="ws-location" placeholder="Örn: Lab A" required>
+          </div>
+          <div class="input-group" style="grid-column: span 2;">
+            <label>Açıklama</label>
+            <textarea id="ws-desc" rows="2"></textarea>
+          </div>
+          <div class="input-group">
+             <label>Dosyadan Afiş Seç</label>
+             <input type="file" id="ws-image" accept="image/*">
+          </div>
+          <div class="input-group">
+            <label>Veya Fotoğraf URL</label>
+            <input type="text" id="ws-image-url">
+          </div>
+        </div>
+        <button type="submit" class="btn-filled">Atölyeyi Kaydet</button>
+        <div id="ws-message" class="message"></div>
+      </form>
+    </div>
     <div id="table-container">
       <p>Veriler yükleniyor...</p>
     </div>

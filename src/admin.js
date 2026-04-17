@@ -11,6 +11,7 @@ const tabButtons = document.querySelectorAll('.tab-btn');
 const speakerFormContainer = document.getElementById('speaker-form-container');
 const programFormContainer = document.getElementById('program-form-container');
 const sponsorFormContainer = document.getElementById('sponsor-form-container');
+const workshopFormContainer = document.getElementById('workshop-form-container');
 const teamFormContainer = document.getElementById('team-form-container');
 const adminSearch = document.getElementById('admin-search');
 const adminStats = document.getElementById('admin-stats');
@@ -46,7 +47,7 @@ tabButtons.forEach(btn => {
         currentType = type;
         
         // Hide all form panels
-        [speakerFormContainer, programFormContainer, sponsorFormContainer, teamFormContainer].forEach(p => {
+        [speakerFormContainer, programFormContainer, sponsorFormContainer, workshopFormContainer, teamFormContainer].forEach(p => {
            if(p) p.style.display = 'none';
         });
 
@@ -54,6 +55,7 @@ tabButtons.forEach(btn => {
         if (type === 'speakers' && speakerFormContainer) speakerFormContainer.style.display = 'block';
         if (type === 'program' && programFormContainer) programFormContainer.style.display = 'block';
         if (type === 'sponsors' && sponsorFormContainer) sponsorFormContainer.style.display = 'block';
+        if (type === 'workshops' && workshopFormContainer) workshopFormContainer.style.display = 'block';
         if (type === 'team' && teamFormContainer) teamFormContainer.style.display = 'block';
         
         // Reset Search
@@ -145,6 +147,8 @@ function renderTable(type, data, isFilter = false) {
         html += `<th>Foto</th><th>Ad Soyad</th><th>Ünvan</th><th>Aksiyon</th>`;
     } else if (type === 'program') {
         html += `<th>Gün</th><th>Saat</th><th>Başlık</th><th>Afiş</th><th>Aksiyon</th>`;
+    } else if (type === 'workshops') {
+        html += `<th>Afiş</th><th>Başlık</th><th>Eğitmen</th><th>Zaman</th><th>Konum</th><th>Aksiyon</th>`;
     } else if (type === 'team') {
         html += `<th>Foto</th><th>Ad Soyad</th><th>Kurum</th><th>Aksiyon</th>`;
     } else {
@@ -161,6 +165,8 @@ function renderTable(type, data, isFilter = false) {
             html += `<tr><td><img src="${item.image_url}" style="width:30px;height:30px;border-radius:50%"></td><td>${item.full_name}</td><td>${item.title} @ ${item.company}</td><td><button onclick="window.deleteItem('speakers', '${item.id}')" style="background:red;color:white;border:none;padding:5px;border-radius:4px;">Sil</button></td></tr>`;
         } else if (type === 'program') {
             html += `<tr><td>${item.day === 'day1' ? '1. Gün' : '2. Gün'}</td><td>${item.time}</td><td>${item.title}</td><td>${item.image_url ? `<img src="${item.image_url}" style="width:30px;height:30px;">` : '-'}</td><td><button onclick="window.deleteItem('program_items', '${item.id}', 'program')" style="background:red;color:white;border:none;padding:5px;border-radius:4px;">Sil</button></td></tr>`;
+        } else if (type === 'workshops') {
+            html += `<tr><td>${item.image_url ? `<img src="${item.image_url}" style="width:30px;height:30px;">` : '-'}</td><td>${item.title}</td><td>${item.instructor}</td><td>${item.date_time}</td><td>${item.location}</td><td><button onclick="window.deleteItem('workshops', '${item.id}')" style="background:red;color:white;border:none;padding:5px;border-radius:4px;">Sil</button></td></tr>`;
         } else if (type === 'team') {
             html += `<tr><td><img src="${item.image_url}" style="width:30px;height:30px;border-radius:40%"></td><td>${item.full_name}</td><td>${item.institution}</td><td><button onclick="window.deleteItem('team_members', '${item.id}', 'team')" style="background:red;color:white;border:none;padding:5px;border-radius:4px;">Sil</button></td></tr>`;
         } else {
@@ -251,4 +257,9 @@ handleSubmit('add-sponsor-form', 'sponsors',
 handleSubmit('add-team-form', 'team_members', 
     [{id:'tm-name', db:'full_name'}, {id:'tm-institution', db:'institution'}],
     'tm-image', 'tm-image-url', 'tm-message', 'team'
+);
+
+handleSubmit('add-workshop-form', 'workshops', 
+    [{id:'ws-title', db:'title'}, {id:'ws-instructor', db:'instructor'}, {id:'ws-datetime', db:'date_time'}, {id:'ws-location', db:'location'}, {id:'ws-desc', db:'description'}],
+    'ws-image', 'ws-image-url', 'ws-message', 'workshops'
 );

@@ -299,6 +299,43 @@ programTabBtns.forEach(btn => {
   });
 });
 
+async function fetchAndRenderWorkshops() {
+  const container = document.getElementById('workshops-container');
+  if (!container) return;
+
+  try {
+    const { data, error } = await supabase.from('workshops').select('*').order('created_at', { ascending: true });
+    if (error) throw error;
+
+    if (data.length === 0) {
+      container.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Henüz atölye eklenmedi.</p>';
+      return;
+    }
+
+    container.innerHTML = data.map(ws => `
+      <div class="workshop-card" style="background: var(--bg-light); border-radius: 20px; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); transition: all 0.3s ease; display: flex; flex-direction: column;">
+        <div class="ws-image" style="height: 200px; width: 100%; overflow: hidden;">
+          <img src="${ws.image_url || 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80'}" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="ws-content" style="padding: 2rem; flex-grow: 1; display: flex; flex-direction: column;">
+          <span style="font-size: 0.7rem; font-weight: 800; color: var(--accent-orange); text-transform: uppercase; margin-bottom: 0.5rem; display: block;">${ws.date_time} • ${ws.location}</span>
+          <h3 style="color: var(--accent-navy); margin-bottom: 1rem; font-size: 1.4rem; font-weight: 700;">${ws.title}</h3>
+          <p style="color: var(--text-main); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.6;">${ws.description || ''}</p>
+          <div style="margin-top: auto; display: flex; align-items: center; gap: 1rem; padding-top: 1rem; border-top: 1px solid rgba(0,0,0,0.05);">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--accent-navy); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700;">${ws.instructor.charAt(0)}</div>
+            <div style="display: flex; flex-direction: column;">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-navy);">${ws.instructor}</span>
+              <span style="font-size: 0.75rem; color: var(--text-main);">Atölye Eğitmeni</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  } catch (err) { console.error('Workshop fetch error:', err); }
+}
+
+fetchAndRenderWorkshops();
+
 // Registration Modal Logic
 const regModal = document.getElementById("register-modal");
 const openRegBtns = document.querySelectorAll(".open-register-btn");
