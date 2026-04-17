@@ -176,6 +176,7 @@ h1 {
 }
 h1 span {
   font-weight: 700;
+  color: var(--accent-orange);
 }
 
 .subtitle {
